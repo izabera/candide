@@ -1,0 +1,45 @@
+candide
+=======
+
+Something to quickly test (very) small c snippets.
+
+
+What
+----
+
+candide is a bot in ##c on freenode, made by pragma-.
+
+This script kinda mimics its behaviour.
+
+
+
+Examples
+--------
+
+$ time candide <<< 'puts(getenv("HOME"));'
+/home/izabera
+
+real    0m0.075s
+user    0m0.050s
+sys     0m0.007s
+
+$ candide
+/* now we're entering text in a read -r -e
+   emacs/vi keybindings work here */
+int factorial(int n) {
+  return n > 1 ? n * factorial(n-1) : 1;
+}
+main () {
+  printf("%d\n",factorial(10));
+}
+                               /* press ^D */
+3628800
+
+
+Usage
+-----
+
+1. Run ./configure
+2. Add candide to your PATH
+3. Run candide
+
