@@ -30,7 +30,7 @@ int factorial(int n) {
   return n > 1 ? n * factorial(n-1) : 1;
 }
 main () {
-  printf("%d\n",factorial(10));
+  printf("%d\n", factorial(10));
 }
                                /* press ^D */
 3628800
