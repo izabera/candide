@@ -1,0 +1,32 @@
+#!/bin/bash
+# compile c from stdin
+# candide, kinda
+
+readinput () {
+  while read -r -e || { printf %s "$REPLY"; false; } ; do
+    printf '%s\n' "$REPLY"
+  done
+}
+
+c=$(readinput)
+if ! [[ $c ]] || ! out=$(mktemp); then
+  echo Error >&2
+  exit 1
+fi
+
+# if you don't write 'main' it assumes that you're writing a full program (with free includes)
+# this allows you to use other functions and stuff
+# it will get false positives, but who cares?
+if [[ c != *main* ]]; then c=$(cat <<SOURCE
+int main(int argc, char *argv[]) {
+$c
+  return 0;
+}
+SOURCE
+); fi
+
+# will replace -O0 with the parameters
+gcc -o "$out" -x c -I ~/bin "${@--O0}" /dev/fd/0 <<SOURCE && { "$out"; rm -f "$out"; }
+#include "headers"    /* precompiled headers */
+$c
+SOURCE
