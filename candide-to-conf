@@ -26,7 +26,7 @@ SOURCE
 ); fi
 
 # will replace -O0 with the parameters
-gcc -o "$out" -x c -I %%DIRECTORY%% "${@--O0}" /dev/fd/0 <<SOURCE && { "$out"; rm -f "$out"; }
+gcc -o "$out" -x c -I %%DIRECTORY%% "${@--O0}" /dev/fd/0 <<SOURCE && { "$out" && { rm -f "$out"; true; }; }
 #include "headers"    /* precompiled headers */
 $c
 SOURCE
