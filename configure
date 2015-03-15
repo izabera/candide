@@ -32,6 +32,7 @@ gcc -o headers.gch -x c-header -c /dev/fd/0 <<SOURCE
 #include <signal.h>
 #include <uchar.h>
 #include <unistd.h>
+#include <fcntl.h>
 SOURCE
 # if you have pipes in your directory, you're evil
 sed "s|%%DIRECTORY%%|$PWD|g" candide-to-conf > candide
